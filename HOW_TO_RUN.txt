@@ -1,0 +1,19 @@
+1. Make the maze 
+
+    ./make_maze.py 
+        Creates a 3x3 maze with cell size 3
+
+    ./make_maze.py ROWS COLUMNS CELL_SIZE
+        Creates a ROWSxCOLUMNS maze with cell size CELL_SIZE
+
+        For example:
+            ./make_maze.py 5 5 2
+
+2. Check the maze 
+
+    gazebo maze_world.xml 
+    
+3. Open the maze with the turtlebot 
+
+    roslaunch turtlebot_gazebo main.launch world_file:=`pwd`/maze_world.xml
+   
