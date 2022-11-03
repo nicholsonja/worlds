@@ -1,0 +1,14 @@
+material right_box/arrow
+{
+  receive_shadows off
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture right_arrow.png
+      }
+    }
+  }
+}
