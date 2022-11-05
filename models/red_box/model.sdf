@@ -32,7 +32,7 @@
           <script>
             <uri>model://red_box/materials/scripts</uri>
             <uri>model://red_box/materials/textures</uri>
-            <name>red_box/arrow</name>
+            <name>red_box/dot</name>
           </script>
 
           <!--
