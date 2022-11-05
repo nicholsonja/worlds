@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1in"
+   height="1in"
+   viewBox="0 0 25.4 25.400001"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   sodipodi:docname="left_arrow.svg"
+   inkscape:export-filename="/Users/nicholsonja/Documents/teaching/classes/CSCI_4560/world_data/left_arrow.png"
+   inkscape:export-xdpi="256"
+   inkscape:export-ydpi="256"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="in"
+     inkscape:zoom="8.7604167"
+     inkscape:cx="48"
+     inkscape:cy="48"
+     inkscape:window-width="1720"
+     inkscape:window-height="1067"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#c0ffff;fill-opacity:1;stroke-width:12.0422;stroke-miterlimit:1"
+       id="rect1376"
+       width="25.4"
+       height="25.4"
+       x="1.9073485e-07"
+       y="1.9073487e-07"
+       inkscape:export-filename="/Users/nicholsonja/Documents/teaching/classes/CSCI_4560/world_data/left_arrow.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <g
+       id="g1210"
+       transform="translate(0,0.88097485)">
+      <rect
+         style="fill:#000000;stroke-width:1.72902;stroke-miterlimit:1"
+         id="rect846"
+         width="10"
+         height="6"
+         x="9.9918776"
+         y="8.819025" />
+      <path
+         id="rect950"
+         style="stroke-width:1.875;stroke-miterlimit:1"
+         d="M 10.252136,5.0384513 V 18.599599 L 3.4715625,11.979196 Z"
+         sodipodi:nodetypes="cccc" />
+    </g>
+  </g>
+</svg>
