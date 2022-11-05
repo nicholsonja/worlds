@@ -22,3 +22,11 @@
 
 	export GAZEBO_MODEL_PATH=`pwd`/models
 	gazebo
+
+5. To view camera
+	
+	start gazebo (#3)
+
+	roslaunch turtlebot_rviz_launchers view_robot.launch
+
+	rviz -d camera.rviz
