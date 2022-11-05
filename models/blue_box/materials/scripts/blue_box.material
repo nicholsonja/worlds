@@ -1,0 +1,14 @@
+material blue_box/dot
+{
+  receive_shadows off
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture blue_dot.png
+      }
+    }
+  }
+}
