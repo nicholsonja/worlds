@@ -16,4 +16,9 @@
 3. Open the maze with the turtlebot 
 
     roslaunch turtlebot_gazebo main.launch world_file:=`pwd`/maze_world.xml
-   
+
+
+4. If playing with gazebo and want to use models in the models folder
+
+	export GAZEBO_MODEL_PATH=`pwd`/models
+	gazebo

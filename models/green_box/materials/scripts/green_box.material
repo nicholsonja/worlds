@@ -1,0 +1,14 @@
+material green_box/dot
+{
+  receive_shadows off
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture green_dot.png
+      }
+    }
+  }
+}

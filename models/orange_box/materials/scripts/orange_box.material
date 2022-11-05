@@ -1,0 +1,14 @@
+material orange_box/dot
+{
+  receive_shadows off
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture orange_dot.png
+      }
+    }
+  }
+}

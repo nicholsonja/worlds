@@ -1,0 +1,14 @@
+material blank_box/dot
+{
+  receive_shadows off
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture blank_dot.png
+      }
+    }
+  }
+}
