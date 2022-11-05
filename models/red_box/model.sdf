@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.7'>
-  <model name='left_box'>
+  <model name='red_box'>
     <link name='link_0'>
       <inertial>
         <mass>1</mass>
@@ -30,9 +30,9 @@
           <lighting>1</lighting>
 
           <script>
-            <uri>model://left_box/materials/scripts</uri>
-            <uri>model://left_box/materials/textures</uri>
-            <name>left_box/arrow</name>
+            <uri>model://red_box/materials/scripts</uri>
+            <uri>model://red_box/materials/textures</uri>
+            <name>red_box/arrow</name>
           </script>
 
           <!--

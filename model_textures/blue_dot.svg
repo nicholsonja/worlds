@@ -8,8 +8,8 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
-   sodipodi:docname="left_arrow.svg"
-   inkscape:export-filename="/Users/nicholsonja/Documents/teaching/classes/CSCI_4560/world_data/left_arrow.png"
+   sodipodi:docname="blue_dot.svg"
+   inkscape:export-filename="/Users/nicholsonja/Documents/teaching/classes/CSCI_4560/world_data/worlds/model_textures/blue_dot.png"
    inkscape:export-xdpi="256"
    inkscape:export-ydpi="256"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -48,25 +48,12 @@
        width="25.4"
        height="25.4"
        x="1.9073485e-07"
-       y="1.9073487e-07"
-       inkscape:export-filename="/Users/nicholsonja/Documents/teaching/classes/CSCI_4560/world_data/left_arrow.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300" />
-    <g
-       id="g1210"
-       transform="translate(0,0.88097485)">
-      <rect
-         style="fill:#000000;stroke-width:1.72902;stroke-miterlimit:1"
-         id="rect846"
-         width="10"
-         height="6"
-         x="9.9918776"
-         y="8.819025" />
-      <path
-         id="rect950"
-         style="stroke-width:1.875;stroke-miterlimit:1"
-         d="M 10.252136,5.0384513 V 18.599599 L 3.4715625,11.979196 Z"
-         sodipodi:nodetypes="cccc" />
-    </g>
+       y="1.9073487e-07" />
+    <circle
+       style="fill:#0000ff;fill-opacity:1;stroke-width:2.48427;stroke-miterlimit:1"
+       id="path1014"
+       cx="12.7"
+       cy="12.7"
+       r="6.3499999" />
   </g>
 </svg>
