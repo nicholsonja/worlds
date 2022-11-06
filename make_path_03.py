@@ -1,47 +1,27 @@
 #!/usr/bin/env python
 
 import re
-from sys import argv, exit
+import sys
+from math import pi
+from pathlib import INCLUDE_TEMPLATE, MODEL_TEMPLATE, INPUT_TEMPLATE_FILE, OUTPUT_WORLD_FILE, INCLUDE_END_TEMPLATE
 from mazelib.grid import Grid
 from mazelib.kruskal import Kruskals
 
+ROT_SOUTH = 0/2 * pi
+ROT_EAST = 1/2 * pi
+ROT_NORTH = 2/2 * pi
+ROW_WEST = 3/2 * pi
 
-INPUT_TEMPLATE_FILE = "path-template.xml"
-OUTPUT_WORLD_FILE = "path_world.xml"
 
+def build_line(name, model_x, model_y, model_yaw, include_template=INCLUDE_TEMPLATE):
+    include = re.sub("MODEL-NAME", name, include_template)
 
-#
-# MODEL_TEMPLATE = """
-#      <model name='MODEL-NAME'>
-#        <pose>MODEL-X MODEL-Y 0.25 0 -0 0</pose>
-#        <scale>1 1 1</scale>
-#        <link name='link_0'>
-#          <pose>MODEL-X MODEL-Y 0.25 0 -0 0</pose>
-#          <velocity>0 0 0 0 -0 0</velocity>
-#          <acceleration>0 -0 0 0 -0 0</acceleration>
-#          <wrench>0 -0 0 0 -0 0</wrench>
-#        </link>
-#      </model>
-# """
+    model = re.sub("MODEL-NAME", name, MODEL_TEMPLATE)
+    model = re.sub("MODEL-YAW", str(model_yaw), model)
+    model = re.sub("MODEL-X", str(model_x), model)
+    model = re.sub("MODEL-Y", str(model_y), model)
 
-MODEL_TEMPLATE = """
-      <model name='MODEL-NAME'>
-        <scale>1 1 1</scale>
-        <pose>MODEL-X MODEL-Y 0 0 -0 0</pose>
-        <velocity>0 0 0 0 -0 0</velocity>
-        <acceleration>0 -0 0 0 -0 0</acceleration>
-        <wrench>0 -0 0 0 -0 0</wrench>
-      </model>
-"""
-
-INCLUDE_TEMPLATE = """
-    <model name='MODEL-NAME'>
-      <static>1</static>
-      <include>
-        <uri>model:///home/user/worlds/models/line</uri>
-	  </include>
-    </model>
-"""
+    return include, model
 
 
 def get_includes_and_models(rows, columns, text_maze):
@@ -56,24 +36,42 @@ def get_includes_and_models(rows, columns, text_maze):
 
     model_num = 0
     model_x = -1
-    for row in lines:
-        model_y = -1
-        for ch in row:
+    model_yaw = 0
+
+    for row_num, row in enumerate(lines):
+        model_y = 0
+        for ch_num, ch in enumerate(row):
             print(ch, end="")
 
-            if ch == " ":
-                name = f"yellowline_{model_num}"
+            if ch in " RE":
 
-                include = re.sub("MODEL-NAME", name, INCLUDE_TEMPLATE)
-                includes.append(include)
+                if ch != 'E' and row[ch_num+1] in " E":
+                    model_num += 1
+                    if row[ch_num+1] == "E":
+                        name = f"purpleline_{model_num}"
+                        include_template = INCLUDE_END_TEMPLATE
+                    else:
+                        name = f"yellowline_{model_num}"
+                        include_template = INCLUDE_TEMPLATE
 
-                model = re.sub("MODEL-NAME", name, MODEL_TEMPLATE)
-                model = re.sub("MODEL-X", str(model_x), model)
-                model = re.sub("MODEL-Y", str(model_y), model)
-                models.append(model)
+                    model_yaw = ROW_WEST
+                    include, model = build_line(
+                        name, model_x, model_y, model_yaw, include_template)
+                    includes.append(include)
+                    models.append(model)
+
+                if lines[row_num+1][ch_num] == " ":
+                    model_num += 1
+                    name = f"yellowline_{model_num}"
+
+                    model_yaw = ROT_SOUTH
+                    include, model = build_line(
+                        name, model_x, model_y-1, model_yaw)
+                    includes.append(include)
+                    models.append(model)
 
             model_y += 1
-            model_num += 1
+
         print()
         model_x += 1
 
@@ -112,18 +110,18 @@ def main(rows, columns, cell_width):
 if __name__ == "__main__":
 
     cell_width = 2
-    if len(argv) == 1:
-        rows = 1
-        columns = 1
-    elif len(argv) == 3:
-        rows = int(argv[1])
-        columns = int(argv[2])
+    if len(sys.argv) == 1:
+        rows = 2
+        columns = 2
+    elif len(sys.argv) == 3:
+        rows = int(sys.argv[1])
+        columns = int(sys.argv[2])
     else:
-        print(f"USAGE: {argv[0]} ROWS COLUMNS")
+        print(f"USAGE: {sys.argv[0]} ROWS COLUMNS")
         exit(0)
 
     if rows < 2 or columns < 2:
-        print("ERROR: Values for ROWS, COLUMNS, and CELL_SIZE must all be >= 2")
+        print("ERROR: Values for ROWS, COLUMNS must all be >= 2")
         exit(0)
 
     main(rows, columns, cell_width)

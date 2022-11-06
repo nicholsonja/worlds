@@ -19,3 +19,12 @@ INCLUDE_TEMPLATE = """
 	  </include>
     </model>
 """
+
+INCLUDE_END_TEMPLATE = """
+    <model name='MODEL-NAME'>
+      <static>1</static>
+      <include>
+        <uri>model:///home/user/worlds/models/end_line</uri>
+	  </include>
+    </model>
+"""

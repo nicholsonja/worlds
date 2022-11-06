@@ -6,7 +6,6 @@ from pathlib import INCLUDE_TEMPLATE, MODEL_TEMPLATE, INPUT_TEMPLATE_FILE, OUTPU
 
 
 def get_includes_and_models(num_cells):
-
     includes = []
     models = []
 
