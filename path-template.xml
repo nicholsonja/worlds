@@ -18,6 +18,8 @@
         <falloff>0</falloff>
       </spot>
     </light>
+
+    <!--GROUND MODEL-->
     
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
@@ -46,7 +48,7 @@
       <wall_time>1665853249 988171439</wall_time>
       <iterations>125076</iterations>
 
-      <!--MODEL LOCATION-->
+      <!--MODEL LOCATION--> 
       <light name='sun'>
         <pose>0 0 10 0 -0 0</pose>
       </light>
