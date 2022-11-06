@@ -2,8 +2,7 @@
 
 import re
 import sys
-from pathlib import *
-from math import pi
+from pathlib import INCLUDE_TEMPLATE, MODEL_TEMPLATE, INPUT_TEMPLATE_FILE, OUTPUT_WORLD_FILE
 
 
 def get_includes_and_models(num_cells):
