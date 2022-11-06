@@ -13,7 +13,7 @@ def get_includes_and_models(num_cells):
 
     model_num = 0
     model_y = 0
-    model_x = .5
+    model_x = 0
     for cell in range(num_cells):
 
         name = f"yellowline_{model_num}"

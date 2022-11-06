@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import re
-from pathlib import *
-from sys import argv
+import sys
+from pathlib import INCLUDE_TEMPLATE, MODEL_TEMPLATE, INPUT_TEMPLATE_FILE, OUTPUT_WORLD_FILE
 from math import pi
 
 
@@ -13,33 +13,25 @@ def get_includes_and_models(num_cells):
 
     model_num = 0
     model_y = 0
-    model_x = .5
+    model_x = 0
 
     for side in range(4):
         if side == 0:
             model_y_inc = 0
             model_x_inc = 1
-            model_yaw = pi/2
         elif side == 1:
-            model_y += .5
-            model_x -= .5
             model_y_inc = 1
             model_x_inc = 0
-            model_yaw = 0
         elif side == 2:
-            model_y -= .5
-            model_x -= .5
             model_y_inc = 0
             model_x_inc = -1
-            model_yaw = pi/2
         else:
-            model_y -= .5
-            model_x += .5
             model_y_inc = -1
             model_x_inc = 0
-            model_yaw = 0
 
-        for cell in range(num_cells):
+        model_yaw = pi/2 + side/2 * pi
+
+        for _ in range(num_cells):
 
             name = f"yellowline_{model_num}"
 
@@ -82,16 +74,16 @@ def main(num_cells):
 
 
 if __name__ == "__main__":
-    if len(argv) == 1:
+    if len(sys.argv) == 1:
         num_cells = 3
-    elif len(argv) == 2:
-        num_cells = int(argv[1])
+    elif len(sys.argv) == 2:
+        num_cells = int(sys.argv[1])
     else:
-        print(f"USAGE: {argv[0]} NUM_CELLS")
-        exit(0)
+        print(f"USAGE: {sys.argv[0]} NUM_CELLS")
+        sys.exit(0)
 
     if num_cells < 1:
         print("ERROR: Values for num_cells = 3 must be >= 1")
-        exit(0)
+        sys.exit(0)
 
     main(num_cells)
