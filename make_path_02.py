@@ -29,7 +29,7 @@ def get_includes_and_models(num_cells):
             model_y_inc = -1
             model_x_inc = 0
 
-        model_yaw = pi/2 + side/2 * pi
+        model_yaw = side/2 * pi
 
         for _ in range(num_cells):
 

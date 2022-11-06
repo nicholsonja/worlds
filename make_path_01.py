@@ -22,7 +22,7 @@ def get_includes_and_models(num_cells):
         includes.append(include)
 
         model = re.sub("MODEL-NAME", name, MODEL_TEMPLATE)
-        model = re.sub("MODEL-YAW", str(pi/2), model)
+        model = re.sub("MODEL-YAW", str(0), model)
         model = re.sub("MODEL-X", str(model_x), model)
         model = re.sub("MODEL-Y", str(model_y), model)
         models.append(model)
