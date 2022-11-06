@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import re
+import sys
 from pathlib import *
-from sys import argv
 from math import pi
 
 
@@ -57,16 +57,16 @@ def main(num_cells):
 
 
 if __name__ == "__main__":
-    if len(argv) == 1:
+    if len(sys.argv) == 1:
         num_cells = 3
-    elif len(argv) == 2:
-        num_cells = int(argv[1])
+    elif len(sys.argv) == 2:
+        num_cells = int(sys.argv[1])
     else:
-        print(f"USAGE: {argv[0]} NUM_CELLS")
-        exit(0)
+        print(f"USAGE: {sys.argv[0]} NUM_CELLS")
+        sys.exit(0)
 
     if num_cells < 1:
         print("ERROR: Values for num_cells = 3 must be >= 1")
-        exit(0)
+        sys.exit(0)
 
     main(num_cells)
