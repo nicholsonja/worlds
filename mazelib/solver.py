@@ -15,21 +15,7 @@ def generate_path(maze, previous, source, end):
         if maze[row][col] != 'E':
             maze[row][col] = "."
         current = previous[current]
-        
-    for row in maze:
-        #line = ""
-        #for ch in row:
-        #    line += ch
-        #print(line)
-        line = ''.join(row)
-        print(line)
-        
-    with open("solved.txt", "w") as data:
-        for row in maze:
-            data.write( "".join(row))
-            data.write("\n")
-    
-# 
+       
 def solve(maze, source_col, source_row, exit_col, exit_row):
     distance = {}
     previous = {}
@@ -82,20 +68,18 @@ def solve(maze, source_col, source_row, exit_col, exit_row):
           
     generate_path(maze, previous, source, end)
 
-
-def read_maze(maze_file):
+def process_maze(data):
     maze = []
-    with open(maze_file, "r") as data:
-        for line in data:
-            line = line.rstrip()
-            line = [ch for ch in line]
-            maze.append(line)  
+    data = data.split("\n")
+    for line in data:
+        line = line.rstrip()
+        line = [ch for ch in line]
+        maze.append(line)  
     return maze
 
-def main(maze_file):
-    maze = read_maze(maze_file)
-    # print(maze)
-    
+def solver(text_maze):
+    maze = process_maze(text_maze)
+ 
     source_col = 1
     source_row = len(maze) - 2
     
@@ -103,8 +87,9 @@ def main(maze_file):
     exit_row = 1
     
     solve(maze, source_col, source_row, exit_col, exit_row)
-            
 
-if __name__ == "__main__":
-    main("maze_1.txt")
-    
+    solved = []
+    for row in maze:
+        line = ''.join(row)
+        solved.append(line)
+    return '\n'.join(solved)
