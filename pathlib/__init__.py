@@ -12,6 +12,8 @@ MODEL_TEMPLATE = """
       </model>
 """
 
+MODEL_LINE_TEMPLATE = MODEL_TEMPLATE
+
 INCLUDE_TEMPLATE = """
     <model name='MODEL-NAME'>
       <static>1</static>
@@ -20,6 +22,8 @@ INCLUDE_TEMPLATE = """
 	  </include>
     </model>
 """
+
+INCLUDE_LINE_TEMPLATE = INCLUDE_TEMPLATE
 
 INCLUDE_END_TEMPLATE = """
     <model name='MODEL-NAME'>

@@ -42,7 +42,7 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
-    <state world_name='default'>
+    <state world_name='default2'>
       <sim_time>259 413000000</sim_time>
       <real_time>132 229064832</real_time>
       <wall_time>1665853249 988171439</wall_time>
