@@ -16,6 +16,7 @@ def get_includes_and_models(boxes):
 
     for box in boxes:
         include = re.sub("MODEL-NAME", box, INCLUDE_BOX_TEMPLATE)
+        include = re.sub("MODEL-FILE", box, include)
         include = re.sub("MODEL-BOX", box, include)
         includes.append(include)
 

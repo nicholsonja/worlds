@@ -38,7 +38,7 @@ INCLUDE_BOX_TEMPLATE = """
     <model name='MODEL-NAME'>
       <static>1</static>
       <include>
-        <uri>model:///home/user/worlds/models/MODEL-BOX</uri>
+        <uri>model:///home/user/worlds/models/MODEL-FILE</uri>
 	  </include>
     </model>
 """

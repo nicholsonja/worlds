@@ -11,6 +11,14 @@ from pathlib import INPUT_TEMPLATE_FILE, OUTPUT_WORLD_FILE, INCLUDE_BOX_TEMPLATE
     MODEL_BOX_TEMPLATE, GROUND_MODEL, GROUND_INCLUDE, INCLUDE_LINE_TEMPLATE, MODEL_LINE_TEMPLATE
 
 
+LEFT_CUBE = "red"
+RIGHT_CUBE = "blue"
+GOAL_CUBE = "black"
+
+NORTH, SOUTH, EAST, WEST = list("NSEW")
+LEFT = "L"
+RIGHT = "R"
+
 def add_grid_line(row, col, lineName, yaw=0):
     include = re.sub("MODEL-NAME", lineName, INCLUDE_LINE_TEMPLATE)
 
@@ -21,8 +29,26 @@ def add_grid_line(row, col, lineName, yaw=0):
 
     return include, model
 
+def add_box(turn_cube, model_num, block_row, block_col, 
+            block_row_adj, block_col_adj):
+    box_file = f"{turn_cube}_box"
+    box_name = f"{box_file}_{model_num}"
+
+    include = re.sub("MODEL-NAME", box_name, INCLUDE_BOX_TEMPLATE)
+    include = re.sub("MODEL-FILE", box_file, include)
+    include = re.sub("MODEL-BOX", box_name, include)
+    
+
+    model = re.sub("MODEL-NAME", box_name, MODEL_BOX_TEMPLATE)
+    model = re.sub("MODEL-YAW", "0", model)
+    model = re.sub("MODEL-X", str(block_row + block_row_adj), model)
+    model = re.sub("MODEL-Y", str(block_col + block_col_adj), model)
+    
+    return include, model
+
 
 def get_includes_and_models(rows, columns, text_maze):
+
 
     includes = []
     models = []
@@ -39,6 +65,7 @@ def get_includes_and_models(rows, columns, text_maze):
 
             model_num += 1
 
+    ''''''
     for col in range(columns+1):
         for row in [_ * .5 for _ in range(2 * rows)]:
             lineName = f"yellowline_{model_num}"
@@ -49,6 +76,101 @@ def get_includes_and_models(rows, columns, text_maze):
             models.append(model)
 
             model_num += 1
+            
+
+    rows = text_maze.split("\n")
+    rows.reverse()
+    text_maze = "\n".join(rows)
+
+    print(text_maze)
+    text_maze = re.sub("#", " ", text_maze)
+    print()
+    print(text_maze)
+
+    rows = text_maze.split("\n")
+    rows = [list(_) for _ in rows]
+
+    cur_row = 1
+    cur_col = 1
+    cur_dir = SOUTH 
+    next_dir = SOUTH
+
+    visited = set()
+
+    while rows[cur_row][cur_col] != "E":
+        visited.add((cur_row, cur_col))
+
+        print(rows[cur_row][cur_col], cur_dir)
+
+        next_pos = {
+            SOUTH : (cur_row + 1, cur_col),
+            NORTH : (cur_row - 1, cur_col), 
+            EAST  : (cur_row, cur_col + 1), 
+            WEST  : (cur_row, cur_col - 1),
+        }
+
+        for direction in next_pos:
+            checkRow, checkCol = next_pos[direction]
+            if rows[checkRow][checkCol] in ".E" and (checkRow, checkCol) not in visited:
+                next_row = checkRow
+                next_col = checkCol 
+                next_dir = direction
+
+        
+        LEFT_TURNS =  {
+            (NORTH, WEST) : (cur_row - 1, cur_col,  .25,  0),
+            (SOUTH, EAST) : (cur_row + 1, cur_col, -.25,  0), 
+            (EAST, NORTH) : (cur_row, cur_col + 1,  0, -.25),
+            (WEST, SOUTH) : (cur_row, cur_col - 1,  0,  .25)
+        }
+        RIGHT_TURNS =  {
+            (NORTH, EAST) : (cur_row - 1, cur_col,  .25, 0),
+            (SOUTH, WEST) : (cur_row + 1, cur_col, -.25, 0), 
+            (EAST, SOUTH) : (cur_row, cur_col + 1,  0, -.25),
+            (WEST, NORTH) : (cur_row, cur_col - 1,  0,  .25)
+        }
+
+        turn = (cur_dir, next_dir)
+        if turn in LEFT_TURNS:
+            turn_dir = LEFT 
+            turn_cube = LEFT_CUBE
+            block_row, block_col, block_row_adj, block_col_adj = LEFT_TURNS[turn]
+        elif turn in RIGHT_TURNS:
+            turn_dir = RIGHT 
+            turn_cube = RIGHT_CUBE
+            block_row, block_col, block_row_adj, block_col_adj = RIGHT_TURNS[turn]
+        elif cur_dir == next_dir:
+            turn_dir = block_row = block_col = turn_cube = None
+            block_row_adj = block_col_adj = None
+        else:
+            raise Exception(f"Bad turn: {[cur_dir, next_dir]}")
+
+        if turn_dir != None:
+            include, model = add_box(turn_cube, model_num, block_row-1, block_col-1, 
+                                    block_row_adj, block_col_adj)
+            includes.append(include)
+            models.append(model)
+
+            model_num += 1
+
+            rows[block_row][block_col] = turn_dir
+
+        cur_col = next_col
+        cur_row = next_row
+        cur_dir = next_dir
+
+        print(f"{cur_row} {cur_col} {cur_dir} turn_dir={turn_dir}")
+
+
+    include, model = add_box(GOAL_CUBE, model_num, 
+                            cur_row-1, cur_col-1, 
+                            0, -.25)
+    includes.append(include)
+    models.append(model)
+    
+    print()
+    for row in rows:
+        print(''.join(row))
 
     return includes, models
 
@@ -73,20 +195,12 @@ def make_world(rows, columns, text_maze):
 
 def main(rows, columns, cell_width):
 
-    #grid = Grid(rows, columns)
+    grid = Grid(rows, columns)
+    Kruskals.on(grid)
+    text_maze = grid.to_string(do_print=False, cell_width=cell_width)
+    solved_text_maze = solver(text_maze)
 
-    # Kruskals.on(grid)
-
-    #text_maze = grid.to_string(do_print=False, cell_width=cell_width)
-
-    #solved_text_maze = solver(text_maze)
-
-    # print("HERE")
-    # print(solved_text_maze)
-
-    text_maze = ""
-
-    make_world(rows, columns, text_maze)
+    make_world(rows, columns, solved_text_maze)
 
 
 if __name__ == "__main__":
