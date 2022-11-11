@@ -82,8 +82,8 @@ if __name__ == "__main__":
         print(f"USAGE: {sys.argv[0]} NUM_CELLS")
         sys.exit(0)
 
-    if num_cells < 1:
-        print("ERROR: Values for num_cells = 3 must be >= 1")
+    if num_cells < 3:
+        print("ERROR: Values for num_cells must be >= 3")
         sys.exit(0)
 
     main(num_cells)
